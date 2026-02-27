@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -11,22 +12,22 @@ public class PalindromeCheckerApp {
      * @version 1.0
 
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
 
-        String orginalString="samir";
-      char[] arr=orginalString.toCharArray();
-      int start=0;
-      int end =arr.length-1;
-      while(start<=end){
-          if(arr[start++]!=arr[end--]){
-              System.out.println(" the given string "+ orginalString+" is not palidrome ");
-              return ;
-          }
-      }
-        System.out.println(" the given string "+orginalString +" is palindrome ");
+        String orginalString = "samas";
+        Stack<Character> sta = new Stack<>();
+        for (char c : orginalString.toCharArray()) {
+            sta.push(c);
+        }
+        for (char c : orginalString.toCharArray()) {
+            if (c != sta.pop()) {
+                System.out.println(" The given string " + orginalString + " is not palindrome ");
+                return;
+            }
+
+        }
+        System.out.println(" The given string " + orginalString + " is  palindrome ");
+
     }
-
-
-
 }
