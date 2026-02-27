@@ -13,19 +13,18 @@ public class PalindromeCheckerApp {
      */
     public static void main(String[] args){
 
-        System.out.println("welcome to palindrom Checker Management System");
-        System.out.println("version :1.0");
-        System.out.println("System initialized successfully ");
+
         String orginalString="samir";
-        String reversedString="";
-        for(int i=orginalString.length()-1;i>=0;i--){
-            reversedString += orginalString.charAt(i);
-        }
-        if (orginalString.equals(reversedString)) {
-            System.out.println(orginalString+ " is palindrome ");
-        }
-        else
-            System.out.println(orginalString+ " is not palindrome");
+      char[] arr=orginalString.toCharArray();
+      int start=0;
+      int end =arr.length-1;
+      while(start<=end){
+          if(arr[start++]!=arr[end--]){
+              System.out.println(" the given string "+ orginalString+" is not palidrome ");
+              return ;
+          }
+      }
+        System.out.println(" the given string "+orginalString +" is palindrome ");
     }
 
 
