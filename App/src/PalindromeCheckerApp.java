@@ -1,7 +1,4 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class PalindromeCheckerApp {
 
@@ -17,19 +14,19 @@ public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
 
-        String orginalString = "saere";
-        Stack<Character> sta = new Stack<>();
-        Queue<Character> cha=new LinkedList<>() ;
+        String orginalString = "motitom";
 
-        for (char c : orginalString.toCharArray()) {
-            sta.push(c);
-            cha.add(c);
-        }
-        while(!sta.empty()) {
-            if (cha.remove() != sta.pop()) {
+        Deque<Character> deque = new ArrayDeque<>();
+for(char c : orginalString.toCharArray()) {
+    deque.add(c);
+}
+        while(!deque.isEmpty()) {
+            if (deque.removeFirst()!=deque.removeLast()) {
                 System.out.println(" The given string " + orginalString + " is not palindrome ");
                 return;
             }
+            if(deque.size()==1)
+                break;
 
         }
         System.out.println(" The given string " + orginalString + " is  palindrome ");
