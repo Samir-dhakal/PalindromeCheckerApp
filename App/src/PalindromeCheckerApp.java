@@ -1,38 +1,35 @@
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.List;
+
 
 public class PalindromeCheckerApp {
 
     /**
      * Application entry point
      * This is the first method executed by the JVM
-     *when the program starts.
+     * when the program starts.
      * * @param args command-line arguments
+     *
      * @author samir dhakal
      * @version 1.0
-
      */
+    public static boolean isPalindrome(String str , int start , int end ) {
+        boolean isPalindrome = true;
+        if(str.charAt(start)!=str.charAt(end)) {
+            isPalindrome = false;
+        }
+        if(start>=end){
+            return true;
+        }
+        isPalindrome(str,start+1,end-1);
+        return isPalindrome;
+    }
     public static void main(String[] args) {
 
 
-        String orginalString = "saere";
-        Stack<Character> sta = new Stack<>();
-        Queue<Character> cha=new LinkedList<>() ;
+        String orginalString = "kaliiiii";
 
-        for (char c : orginalString.toCharArray()) {
-            sta.push(c);
-            cha.add(c);
-        }
-        while(!sta.empty()) {
-            if (cha.remove() != sta.pop()) {
-                System.out.println(" The given string " + orginalString + " is not palindrome ");
-                return;
-            }
-
-        }
-        System.out.println(" The given string " + orginalString + " is  palindrome ");
+        System.out.println(" The given string " + orginalString + "is palindrome :"+isPalindrome(orginalString,0,orginalString.length()-1));
 
     }
 }
