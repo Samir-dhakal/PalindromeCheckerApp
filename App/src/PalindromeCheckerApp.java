@@ -1,5 +1,39 @@
 import java.util.*;
 
+//class LinkedList{
+//    Node head= null;
+//    class Node{
+//        char data;
+//        Node next;
+//        public  Node(char data){
+//            this.data = data;
+//            this.next=null;
+//        }
+//
+//    }
+//    public void add(char data){
+//        Node newNode = new Node(data);
+//        if(head==null){
+//            head=newNode;
+//            return;
+//        }
+//        Node currNode=head;
+//        while(currNode.next!=null){
+//            currNode=currNode.next;
+//        }
+//        currNode=newNode;
+//    }
+//    public void printAll(){
+//        Node currNode=head;
+//        while(currNode!=null){
+//            System.out.print(currNode.data+" ");
+//            currNode=currNode.next;
+//        }
+//    }
+//
+//
+//
+//}
 public class PalindromeCheckerApp {
 
     /**
@@ -11,21 +45,27 @@ public class PalindromeCheckerApp {
      * @version 1.0
 
      */
+
     public static void main(String[] args) {
 
 
-        String orginalString = "motitom";
-
-        Deque<Character> deque = new ArrayDeque<>();
+        String orginalString = "mottom";
+        List<Character> list= new LinkedList<>();
+//        LinkedList list = new LinkedList();
+//
+//
+//
 for(char c : orginalString.toCharArray()) {
-    deque.add(c);
+    list.add(c);
 }
-        while(!deque.isEmpty()) {
-            if (deque.removeFirst()!=deque.removeLast()) {
+//list.printAll();
+
+        while(!list.isEmpty()) {
+            if (list.removeFirst()!=list.removeLast()) {
                 System.out.println(" The given string " + orginalString + " is not palindrome ");
                 return;
             }
-            if(deque.size()==1)
+            if(list.size()==1)
                 break;
 
         }
