@@ -1,41 +1,80 @@
+import java.util.*;
 
 /**
- * Application entry point
- * This is the first method executed by the JVM
- * when the program starts.
- * * @param args command-line arguments
- *
- * @author samir dhakal
- * @version 1.0
- * UC12: Case-Insensitive & Space-Ignored Palindrome
+ ============================================================
+ MAIN CLASS - PalindromeCheckerApp
+ ============================================================
+
+ Use Case 13: Performance Comparison
+
+ Description:
+ This application compares the execution time of
+ different palindrome validation algorithms.
+
+ Algorithms Compared:
+ 1. Two Pointer Approach
+ 2. Stack Based Approach
+ 3. Deque Based Approach
+
+ The application:
+ - Executes each algorithm
+ - Captures execution time using System.nanoTime()
+ - Displays performance results
+
+ @author Samir Dhakal
+ @version 13.0
+ ============================================================
  */
-import java.util.Stack;
 
-interface PalindromeStrategy {
-    boolean check(String str);
-}
+public class PalindromeCheckerApp {
 
+    public static void main(String[] args) {
 
-class LoopStrategy implements PalindromeStrategy {
-    @Override
-    public boolean check(String str) {
-        str = str.trim().toLowerCase();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
 
-        for (int i = 0; i < str.length() / 2; i++) {
-            if (str.charAt(i) != str.charAt(str.length() - i - 1)) {
+        // Normalize input
+        String cleaned = input.replaceAll("\\W", "").toLowerCase();
+
+        long start1 = System.nanoTime();
+        boolean result1 = twoPointer(cleaned);
+        long end1 = System.nanoTime();
+        long time1 = end1 - start1;
+
+        long start2 = System.nanoTime();
+        boolean result2 = stackMethod(cleaned);
+        long end2 = System.nanoTime();
+        long time2 = end2 - start2;
+
+        long start3 = System.nanoTime();
+        boolean result3 = dequeMethod(cleaned);
+        long end3 = System.nanoTime();
+        long time3 = end3 - start3;
+
+        System.out.println("\nResults:");
+        System.out.println("Two Pointer Result: " + result1 + " | Time: " + time1 + " ns");
+        System.out.println("Stack Result: " + result2 + " | Time: " + time2 + " ns");
+        System.out.println("Deque Result: " + result3 + " | Time: " + time3 + " ns");
+
+        sc.close();
+    }
+
+    public static boolean twoPointer(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
                 return false;
             }
+            left++;
+            right--;
         }
         return true;
     }
-}
 
-
-class StackStrategy implements PalindromeStrategy {
-    @Override
-    public boolean check(String str) {
-        str = str.trim().toLowerCase();
-
+    public static boolean stackMethod(String str) {
         Stack<Character> stack = new Stack<>();
 
         for (char c : str.toCharArray()) {
@@ -49,41 +88,19 @@ class StackStrategy implements PalindromeStrategy {
         }
         return true;
     }
-}
 
+    public static boolean dequeMethod(String str) {
+        Deque<Character> deque = new ArrayDeque<>();
 
-class PalindromeContext {
-    private PalindromeStrategy strategy;
+        for (char c : str.toCharArray()) {
+            deque.addLast(c);
+        }
 
-    public PalindromeContext(PalindromeStrategy strategy) {
-        this.strategy = strategy;
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+        return true;
     }
-
-    public void setStrategy(PalindromeStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public boolean checkPalindrome(String str) {
-        return strategy.check(str);
-    }
-}
-
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        String input = "kalilak";
-
-
-        PalindromeStrategy strategy = new LoopStrategy();
-        // PalindromeStrategy strategy = new StackStrategy();
-
-        PalindromeContext context = new PalindromeContext(strategy);
-
-        System.out.println("Input: " + input);
-        System.out.println("Is Palindrome: " + context.checkPalindrome(input));
-    }
-
-
-
-
-
 }
